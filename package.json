@@ -1,0 +1,24 @@
+{
+  "name": "she-ra-api",
+  "version": "1.0.0",
+  "description": "She-Ra Api",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/adoxic/she-ra-api.git"
+  },
+  "author": "Maeve Griffin",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/adoxic/she-ra-api/issues"
+  },
+  "homepage": "https://github.com/adoxic/she-ra-api#readme",
+  "dependencies": {
+    "axios": "^0.19.1",
+    "cheerio": "^1.0.0-rc.3",
+    "puppeteer": "^2.0.0"
+  }
+}

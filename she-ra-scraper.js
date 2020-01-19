@@ -12,11 +12,12 @@ axios(url)
     const characterImages = $('.image.image-thumbnail');
 
     const character = {
+      names: [],
       images: [],
     };
     for (let i = 0; i < characterImages.length; i++) {
       const image = characterImages[i].attribs;
-      if(image.title) {
+      if(image.title && image.href.match(/^https/g)) {
         character.images[i] = image;
       }
     }

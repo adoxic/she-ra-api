@@ -10,10 +10,15 @@ axios(url)
     const html = response.data;
     const $ = cheerio.load(html);
     const characterImages = $('.image.image-thumbnail');
+    const nickNames = $('div.pi-data-value.pi-font');
+    const formatNickName = nickNames[0].children;
 
     const character = {
       names: [],
       images: [],
+      alive: true,
+      nicknames: [],
+      skills: [],
     };
     for (let i = 0; i < characterImages.length; i++) {
       const image = characterImages[i].attribs;
@@ -21,6 +26,13 @@ axios(url)
         character.images[i] = image;
       }
     }
+    for (let i = 0; i < formatNickName.length; i++) {
+      const nameObj = formatNickName[i];
+      if(nameObj.data) {
+        character.nicknames.push(nameObj.data);
+      }
+    }
+
     console.log(character);
   })
   .catch(console.error);

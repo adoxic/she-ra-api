@@ -29,6 +29,10 @@ axios(url)
     for (let i = 0; i < formatNickName.length; i++) {
       const nameObj = formatNickName[i];
       if(nameObj.data) {
+        nameObj.data = nameObj.data.replace(/\(|\)/g, '');
+        console.log(nameObj.data);
+      }
+      if(nameObj.data) {
         character.nicknames.push(nameObj.data);
       }
     }

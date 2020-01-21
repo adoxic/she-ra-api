@@ -2,6 +2,7 @@
 
 const axios = require('axios');
 const cheerio = require('cheerio');
+const { formatList } = require('./utils');
 
 const url = 'https://she-raandtheprincessesofpower.fandom.com/wiki/Adora';
 
@@ -10,8 +11,10 @@ axios(url)
     const html = response.data;
     const $ = cheerio.load(html);
     const characterImages = $('.image.image-thumbnail');
-    const nickNames = $('div.pi-data-value.pi-font');
-    const formatNickName = nickNames[0].children;
+    const lists = $('div.pi-data-value.pi-font');
+    
+    const nickName = lists[0].children;
+    const skills = lists[1].children;
 
     const character = {
       names: [],
@@ -26,16 +29,9 @@ axios(url)
         character.images[i] = image;
       }
     }
-    for (let i = 0; i < formatNickName.length; i++) {
-      const nameObj = formatNickName[i];
-      if(nameObj.data) {
-        nameObj.data = nameObj.data.replace(/\(|\)/g, '');
-        console.log(nameObj.data);
-      }
-      if(nameObj.data) {
-        character.nicknames.push(nameObj.data);
-      }
-    }
+    
+    formatList(nickName, character.nicknames);
+    formatList(skills, character.skills);
 
     console.log(character);
   })

@@ -12,16 +12,26 @@ axios(url)
     const $ = cheerio.load(html);
     const characterImages = $('.image.image-thumbnail');
     const lists = $('div.pi-data-value.pi-font');
+    const name = $('h2.pi-item.pi-item-spacing.pi-title');
     
     const nickName = lists[0].children;
     const skills = lists[1].children;
 
     const character = {
-      names: [],
+      name: '',
       images: [],
-      alive: true,
+      status: 'alive',
       nicknames: [],
+      occupation: [],
       skills: [],
+      allies: [],
+      enemies: [],
+      allegiance: [],
+      rank: [],
+      species: '',
+      gender: '',
+      allegement: '',
+      homePlanet: ''
     };
     for (let i = 0; i < characterImages.length; i++) {
       const image = characterImages[i].attribs;
@@ -29,7 +39,7 @@ axios(url)
         character.images[i] = image;
       }
     }
-    
+    character.name = name[0].children[0].data;
     formatList(nickName, character.nicknames);
     formatList(skills, character.skills);
 

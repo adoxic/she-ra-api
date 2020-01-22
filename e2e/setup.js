@@ -1,5 +1,6 @@
 const connect = require('../lib/connect');
-const MONGODB_URI = 'mongodb://localhost:27017/change-me';
+// const MONGODB_URI = global.__MONGO_URI__;
+const MONGODB_URI = 'mongodb://localhost:27017/she-ra-test';
 const mongoose = require('mongoose');
 
 beforeAll(() => {

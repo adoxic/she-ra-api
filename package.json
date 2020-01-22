@@ -4,7 +4,15 @@
   "description": "She-Ra Api",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest --verbose --runInBand",
+    "test:watch": "npm run test -- --watch",
+    "start": "node server.js",
+    "start:watch": "nodemon server.js"
+  },
+  "jest": {
+    "setupFilesAfterEnv": [
+      "<rootDir>/e2e/setup.js"
+    ]
   },
   "repository": {
     "type": "git",

@@ -16,14 +16,17 @@ axios(url)
     
     const nickName = lists[0].children;
     const skills = lists[1].children;
+    const occupation = lists[2].children;
+    const species = lists[3].children[0].data;
+    const gender = lists[4].children[0].data;
 
     const character = {
       name: '',
       images: [],
       status: 'alive',
       nicknames: [],
-      occupation: [],
       skills: [],
+      occupation: [],
       allies: [],
       enemies: [],
       allegiance: [],
@@ -33,15 +36,18 @@ axios(url)
       allegement: '',
       homePlanet: ''
     };
-    for (let i = 0; i < characterImages.length; i++) {
+    for(let i = 0; i < characterImages.length; i++) {
       const image = characterImages[i].attribs;
       if(image.title && image.href.match(/^https/g)) {
         character.images[i] = image;
       }
     }
     character.name = name[0].children[0].data;
+    character.species = species;
+    character.gender = gender;
     formatList(nickName, character.nicknames);
     formatList(skills, character.skills);
+    formatList(occupation, character.occupation);
 
     console.log(character);
   })

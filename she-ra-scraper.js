@@ -28,11 +28,22 @@ axios(url)
       }
     }
     character.name = name[0].children[0].data;
-    let theThing = keys[0].children[0].data;
-    character[theThing] = [];
     
-    formatList(values[0].children, character[theThing]);
+    for(let i = 0; i < keys.length; i++) {
+      const key = keys[i].children[0].data;
+      const value = values[i].children;
+      if(value.length > 1) {
+        
+        character[key] = [];
+        formatList(value, character[key]);
+      } else {
+        if(value.data) {
+          character[key] = value.data;
+        }
+      }
+    }
     console.log(character);
+    
 
   })
   .catch(console.error);

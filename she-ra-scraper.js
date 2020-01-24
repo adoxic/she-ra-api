@@ -1,4 +1,5 @@
 // she-ra page test
+/* eslint-disable  no-console */
 
 const axios = require('axios');
 const cheerio = require('cheerio');
@@ -42,8 +43,5 @@ axios(url)
         }
       }
     }
-    console.log(character);
-    
-
   })
   .catch(console.error);

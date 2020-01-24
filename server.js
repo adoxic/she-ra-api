@@ -1,4 +1,5 @@
 // loads the .env environment variables
+/* eslint-disable  no-console */
 require('dotenv').config();
 // connect to mongo
 require('./lib/connect')(process.env.MONGODB_URI);

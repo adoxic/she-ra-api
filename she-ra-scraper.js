@@ -1,4 +1,5 @@
 // she-ra page test
+/* eslint-disable  no-console */
 
 const axios = require('axios');
 const cheerio = require('cheerio');
@@ -37,13 +38,10 @@ axios(url)
         character[key] = [];
         formatList(value, character[key]);
       } else {
-        if(value.data) {
-          character[key] = value.data;
+        if(value[0].data) {
+          character[key] = value[0].data;
         }
       }
     }
-    console.log(character);
-    
-
   })
   .catch(console.error);

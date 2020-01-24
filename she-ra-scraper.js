@@ -12,6 +12,7 @@ axios(url)
     const $ = cheerio.load(html);
     const characterImages = $('.image.image-thumbnail');
     const lists = $('div.pi-data-value.pi-font');
+    const keys = $('h3.pi-data-label.pi-secondary-font');
     const name = $('h2.pi-item.pi-item-spacing.pi-title');
     
     const nickName = lists[0].children;
@@ -19,6 +20,8 @@ axios(url)
     const occupation = lists[2].children;
     const species = lists[3].children[0].data;
     const gender = lists[4].children[0].data;
+    let allegement = lists[5].children[0];
+    
 
     const character = {
       name: '',
@@ -49,6 +52,6 @@ axios(url)
     formatList(skills, character.skills);
     formatList(occupation, character.occupation);
 
-    console.log(character);
+    console.log(keys[0].children);
   })
   .catch(console.error);

@@ -10,31 +10,16 @@ axios(url)
   .then(response => {
     const html = response.data;
     const $ = cheerio.load(html);
+    
+    const values = $('div.pi-data-value.pi-font');
+    const keys = $('h3.pi-data-label.pi-secondary-font');
+    
     const characterImages = $('.image.image-thumbnail');
-    const lists = $('div.pi-data-value.pi-font');
     const name = $('h2.pi-item.pi-item-spacing.pi-title');
     
-    const nickName = lists[0].children;
-    const skills = lists[1].children;
-    const occupation = lists[2].children;
-    const species = lists[3].children[0].data;
-    const gender = lists[4].children[0].data;
-
     const character = {
       name: '',
       images: [],
-      status: 'alive',
-      nicknames: [],
-      skills: [],
-      occupation: [],
-      allies: [],
-      enemies: [],
-      allegiance: [],
-      rank: [],
-      species: '',
-      gender: '',
-      allegement: '',
-      homePlanet: ''
     };
     for(let i = 0; i < characterImages.length; i++) {
       const image = characterImages[i].attribs;
@@ -43,12 +28,22 @@ axios(url)
       }
     }
     character.name = name[0].children[0].data;
-    character.species = species;
-    character.gender = gender;
-    formatList(nickName, character.nicknames);
-    formatList(skills, character.skills);
-    formatList(occupation, character.occupation);
-
+    
+    for(let i = 0; i < keys.length; i++) {
+      const key = keys[i].children[0].data;
+      const value = values[i].children;
+      if(value.length > 1) {
+        
+        character[key] = [];
+        formatList(value, character[key]);
+      } else {
+        if(value.data) {
+          character[key] = value.data;
+        }
+      }
+    }
     console.log(character);
+    
+
   })
   .catch(console.error);

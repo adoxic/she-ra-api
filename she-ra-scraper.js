@@ -37,8 +37,8 @@ axios(url)
         character[key] = [];
         formatList(value, character[key]);
       } else {
-        if(value.data) {
-          character[key] = value.data;
+        if(value[0].data) {
+          character[key] = value[0].data;
         }
       }
     }

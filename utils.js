@@ -1,4 +1,5 @@
 const formatList = (arr, type) => {
+  
  
   for(let i = 0; i < arr.length; i++) {
     const elementObj = arr[i];
@@ -13,7 +14,7 @@ const formatList = (arr, type) => {
 
       const linkName = elementObj.attribs.title;
 
-      if(arr[i - 1].data && arr[i + 1].data) {
+      if(arr[i - 1].data || arr[i + 1].data) {
         const joined = `${arr[i - 1].data}${linkName}${arr[i + 1].data}`;
         type.splice((type.length - 1), 1, joined);
         i++;

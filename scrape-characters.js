@@ -6,10 +6,10 @@ const cheerio = require('cheerio');
 
 const baseUrl = 'https://she-raandtheprincessesofpower.fandom.com';
 const url = `${baseUrl}/wiki/Category:Characters`;
-let characterArray = [];
 
 axios(url)
   .then(response => {
+    let characterArray = [];
     const html = response.data;
     const $ = cheerio.load(html);
     
@@ -26,9 +26,8 @@ axios(url)
         characterArray.push(characterObj.attribs.href);
       }
     }
-    
-    console.log(characterArray);
+    return characterArray;
   })
   .catch(console.error);
 
-module.exports = characterArray;
+module.exports = axios;

@@ -4,10 +4,19 @@
 const axios = require('axios');
 const cheerio = require('cheerio');
 const { formatList } = require('./utils');
+const characterArray = require('./scrape-characters');
+
 
 const baseUrl = 'https://she-raandtheprincessesofpower.fandom.com';
-const url = `${baseUrl}wiki/Adora`;
 
+const urlChar = `${baseUrl}/wiki/Category:Characters`;
+
+const urlList = async() => {
+  return await characterArray(urlChar);
+};
+
+
+    
 axios(url)
   .then(response => {
     const html = response.data;
@@ -43,6 +52,8 @@ axios(url)
           character[key] = value[0].data;
         }
       }
+        
     }
   })
   .catch(console.error);
+

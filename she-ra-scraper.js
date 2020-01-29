@@ -5,7 +5,8 @@ const axios = require('axios');
 const cheerio = require('cheerio');
 const { formatList } = require('./utils');
 
-const url = 'https://she-raandtheprincessesofpower.fandom.com/wiki/Adora';
+const baseUrl = 'https://she-raandtheprincessesofpower.fandom.com';
+const url = `${baseUrl}wiki/Adora`;
 
 axios(url)
   .then(response => {

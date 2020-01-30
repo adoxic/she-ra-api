@@ -5,7 +5,7 @@ const axios = require('axios');
 const cheerio = require('cheerio');
 const { formatList } = require('./utils');
 const currentCharacters = require('./scrape-characters');
-
+const fetch = require('node-fetch');
 
 const baseUrl = 'https://she-raandtheprincessesofpower.fandom.com';
 
@@ -54,7 +54,21 @@ for(let i = 0; i < currentCharacters.length; i++) {
         }
           
       }
-      console.log(character);
+      if(character) {
+        const data = JSON.stringify(character);
+        var headers = {
+          'Content-Type': 'application/json'
+        };
+
+        fetch('', { method: 'POST', headers: headers, body: data })
+          .then((res) => {
+            return res.json();
+          })
+          .then((json) => {
+            console.log(json);
+            // Do something with the returned data.
+          });
+      }
     })
     .catch(console.error);
 }

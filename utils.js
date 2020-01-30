@@ -13,12 +13,12 @@ const formatList = (arr, type) => {
       let joined;
 
       const linkName = elementObj.attribs.title;
-      if(arr[i - 1].data) {
+      if(arr[i - 1].data && !arr[i + 1].data) {
         joined = `${arr[i - 1].data}${linkName}`;
         type.splice((type.length - 1), 1, joined);
       }
 
-      if(arr[i + 1].data) {
+      if(arr[i + 1].data && !arr[i - 1].data) {
         joined = `${linkName}${arr[i + 1].data}`;
         type.push(joined);
         i++;

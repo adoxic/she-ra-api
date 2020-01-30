@@ -1,5 +1,4 @@
 const formatList = (arr, type) => {
-  
  
   for(let i = 0; i < arr.length; i++) {
     const elementObj = arr[i];
@@ -11,11 +10,22 @@ const formatList = (arr, type) => {
         if(linkName) type.push(linkName);
       }
     } else if(elementObj.type === 'tag' && elementObj.attribs.title) {
+      let joined;
 
       const linkName = elementObj.attribs.title;
+      if(arr[i - 1].data) {
+        joined = `${arr[i - 1].data}${linkName}`;
+        type.splice((type.length - 1), 1, joined);
+      }
 
-      if(arr[i - 1].data || arr[i + 1].data) {
-        const joined = `${arr[i - 1].data}${linkName}${arr[i + 1].data}`;
+      if(arr[i + 1].data) {
+        joined = `${linkName}${arr[i + 1].data}`;
+        type.push(joined);
+        i++;
+      }
+
+      if(arr[i - 1].data && arr[i + 1].data) {
+        joined = `${arr[i - 1].data}${linkName}${arr[i + 1].data}`;
         type.splice((type.length - 1), 1, joined);
         i++;
       }

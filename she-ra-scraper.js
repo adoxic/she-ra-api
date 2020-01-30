@@ -39,7 +39,10 @@ for(let i = 0; i < currentCharacters.length; i++) {
       
       for(let i = 0; i < keys.length; i++) {
         const key = keys[i].children[0].data;
-        const value = values[i].children;
+        let value = values[i].children;
+        if(value.includes(',')) {
+          value = value.split(',');
+        }
         if(value.length > 1) {
           
           character[key] = [];

@@ -46,8 +46,7 @@ for(let i = 0; i < currentCharacters.length; i++) {
           if(value[0].data) {
             character[key] = value[0].data;
           }
-        }
-          
+        }  
       }
       if(character) {
         const data = JSON.stringify(character);

@@ -46,4 +46,27 @@ const imageFormat = (arr, obj) => {
   }
 };
 
-module.exports = { formatList, imageFormat };
+const formatKeyValue = (keys, values, obj) => {
+  for(let i = 0; i < keys.length; i++) {
+
+    const key = keys[i].children[0].data;
+    let value = values[i].children;
+
+    if(value[0].data.includes(',')) {
+      value = value[0].data.split(',');
+    }
+    if(value.length > 1) {
+      
+      obj[key] = [];
+      formatList(value, obj[key]);
+
+    } else {
+      if(value[0].data) {
+        obj[key] = value[0].data;
+      }
+    }  
+  }
+};
+
+
+module.exports = { formatList, imageFormat, formatKeyValue };

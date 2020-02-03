@@ -3,7 +3,7 @@
 
 const axios = require('axios');
 const cheerio = require('cheerio');
-const { formatList } = require('./utils');
+const { formatList, imageFormat } = require('./utils');
 const currentCharacters = require('./scrape-characters');
 const fetch = require('node-fetch');
 
@@ -29,12 +29,7 @@ for(let i = 0; i < currentCharacters.length; i++) {
         name: '',
         images: [],
       };
-      for(let i = 0; i < characterImages.length; i++) {
-        const image = characterImages[i].attribs;
-        if(image.href.match(/^https/g)) {
-          character.images[i] = image;
-        }
-      }
+      imageFormat(characterImages, character);
       character.name = name[0].children[0].data;
       
       for(let i = 0; i < keys.length; i++) {
@@ -51,8 +46,7 @@ for(let i = 0; i < currentCharacters.length; i++) {
           if(value[0].data) {
             character[key] = value[0].data;
           }
-        }
-          
+        }  
       }
       if(character) {
         const data = JSON.stringify(character);

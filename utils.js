@@ -37,4 +37,13 @@ const formatList = (arr, type) => {
   }
 };
 
-module.exports = { formatList };
+const imageFormat = (arr, obj) => {
+  for(let i = 0; i < arr.length; i++) {
+    const image = arr[i].attribs;
+    if(image.href.match(/^https/g)) {
+      obj.images[i] = image;
+    }
+  }
+};
+
+module.exports = { formatList, imageFormat };

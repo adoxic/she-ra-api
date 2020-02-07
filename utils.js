@@ -53,7 +53,14 @@ const formatKeyValue = (keys, values, obj) => {
     let value = values[i].children;
 
     if(value[0].data.includes(',')) {
+
       value = value[0].data.split(',');
+      obj[key] = [];
+      
+      for(let i = 0; i < value.length; i++) {
+        const el = value[i];
+        obj[key].push(el);
+      }
     }
     if(value.length > 1) {
       
@@ -67,6 +74,5 @@ const formatKeyValue = (keys, values, obj) => {
     }  
   }
 };
-
 
 module.exports = { formatList, imageFormat, formatKeyValue };

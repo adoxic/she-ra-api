@@ -54,7 +54,7 @@ for(let i = 0; i < currentCharacters.length; i++) {
           'Content-Type': 'application/json'
         };
 
-        fetch('', { method: 'POST', headers: headers, body: data })
+        fetch('https://cryptic-hollows-08294.herokuapp.com/api/characters', { method: 'POST', headers: headers, body: data })
           .then((res) => {
             return res.json();
           })

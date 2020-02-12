@@ -16,14 +16,14 @@ const formatList = (arr, type) => {
           i++;
         }
 
-        if(elementObj.next.type === 'text') {
+        if(elementObj.next.type === 'text' && elementObj.next.type === 'tag') {
     
           joined = `${linkName}${elementObj.next.data}`;
           type.push(joined);
           i++;
         }
 
-        if(elementObj.prev.type === 'text') {
+        if(elementObj.prev.type === 'text' && elementObj.next.type === 'tag') {
     
           joined = `${elementObj.prev.data}${linkName}`;
           type.splice((type.length - 1), 1, joined);

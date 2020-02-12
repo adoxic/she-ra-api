@@ -1,8 +1,8 @@
 const formatList = (arr, type) => {
-  console.log(arr);
+  
   for(let i = 0; i < arr.length; i++) {
     const elementObj = arr[i];
-
+    
     if(elementObj.name === 'a') {
       let joined = elementObj.attribs.title;
       const linkName = elementObj.attribs.title;
@@ -16,14 +16,14 @@ const formatList = (arr, type) => {
           i++;
         }
 
-        if(elementObj.next.type === 'text') {
+        if(elementObj.next.type === 'text' && elementObj.prev.type === 'tag') {
     
           joined = `${linkName}${elementObj.next.data}`;
           type.push(joined);
           i++;
         }
 
-        if(elementObj.prev.type === 'text') {
+        if(elementObj.prev.type === 'text' && elementObj.next.type === 'tag') {
     
           joined = `${elementObj.prev.data}${linkName}`;
           type.splice((type.length - 1), 1, joined);
@@ -55,12 +55,11 @@ const imageFormat = (arr, obj) => {
 
 const formatKeyValue = (keys, values, obj) => {
   for(let i = 0; i < keys.length; i++) {
-
     const key = keys[i].children[0].data;
     let value = values[i].children;
-
+    
     if(value[0].data.includes(',')) {
-
+      
       value = value[0].data.split(',');
       obj[key] = [];
       

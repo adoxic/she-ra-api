@@ -9,18 +9,30 @@ const formatList = (arr, type) => {
 
       if(elementObj.prev && elementObj.next) {
 
-        if(elementObj.prev.type === 'text') {
+        if(elementObj.prev.type === 'text' && elementObj.next.type === 'text') {
 
-          joined = `${elementObj.prev.data}${linkName}`;
+          joined = `${elementObj.prev.data}${linkName}${elementObj.next.data}`;
           type.splice((type.length - 1), 1, joined);
-          if(elementObj.next.type === 'text') {
-
-            joined = `${elementObj.prev.data}${linkName}${elementObj.next.data}`;
-            type.splice((type.length - 1), 1, joined);
-            i++;
-          }
+          i++;
         }
 
+        if(elementObj.next.type === 'text') {
+    
+          joined = `${linkName}${elementObj.next.data}`;
+          type.push(joined);
+          i++;
+        }
+
+        if(elementObj.prev.type === 'text') {
+    
+          joined = `${elementObj.prev.data}${linkName}`;
+          type.splice((type.length - 1), 1, joined);
+        }
+
+        if(elementObj.prev.type === 'tag' && elementObj.next.type === 'tag') {
+          type.push(joined);
+        }
+        
       } else {
         type.push(joined);
       }

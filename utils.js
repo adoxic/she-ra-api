@@ -39,9 +39,6 @@ const formatList = (arr, type) => {
     }
 
     if(elementObj.data) {
-      if(elementObj.data.includes('Chaotic Evil')) {
-        console.log(arr);
-      }
       type.push(elementObj.data);
     }
   }

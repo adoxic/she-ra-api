@@ -1,40 +1,41 @@
 const formatList = (arr, type) => {
- 
+  console.log(arr);
   for(let i = 0; i < arr.length; i++) {
     const elementObj = arr[i];
 
-    if(arr[i + 1] === undefined || arr[i + 1].type === 'tag') {
-      if(elementObj.type === 'tag') {
-        const linkName = elementObj.attribs.title;
-        
-        if(linkName) {
-          type.push(linkName);
-        } 
-      }
-    } else if(elementObj.type === 'tag' && elementObj.attribs.title) {
-      let joined;
-      
+    if(elementObj.name === 'a') {
+      let joined = elementObj.attribs.title;
       const linkName = elementObj.attribs.title;
 
-      if(arr[i - 1] && arr[i + 1]) {
-        joined = `${arr[i - 1].data}${linkName}${arr[i + 1].data}`;
-        joined.replace(/undefined/g, '');
-        type.splice((type.length - 1), 1, joined);
-        i++;
-      }
-      if(arr[i - 1]) {
-        joined = `${arr[i - 1].data}${linkName}`;
-        joined.replace(/undefined/g, '');
-        type.splice((type.length - 1), 1, joined);
-      }
+      if(elementObj.prev && elementObj.next) {
 
-      if(arr[i + 1]) {
-        joined = `${linkName}${arr[i + 1].data}`;
-        joined.replace(/undefined/g, '');
+        if(elementObj.prev.type === 'text' && elementObj.next.type === 'text') {
+
+          joined = `${elementObj.prev.data}${linkName}${elementObj.next.data}`;
+          type.splice((type.length - 1), 1, joined);
+          i++;
+        }
+
+        if(elementObj.next.type === 'text') {
+    
+          joined = `${linkName}${elementObj.next.data}`;
+          type.push(joined);
+          i++;
+        }
+
+        if(elementObj.prev.type === 'text') {
+    
+          joined = `${elementObj.prev.data}${linkName}`;
+          type.splice((type.length - 1), 1, joined);
+        }
+
+        if(elementObj.prev.type === 'tag' && elementObj.next.type === 'tag') {
+          type.push(joined);
+        }
+        
+      } else {
         type.push(joined);
-        i++;
       }
-
     }
 
     if(elementObj.data) {

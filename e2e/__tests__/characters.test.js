@@ -24,6 +24,11 @@ describe('test character routes', () => {
       Status: 'Alive'
     };
 
-    
+    return request
+      .get('/api/characters')
+      .expect(200)
+      .then(res => {
+        expect(res.name).toBe('Adora');
+      });
   });
 });

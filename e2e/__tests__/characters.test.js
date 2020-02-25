@@ -1,6 +1,21 @@
+require('dotenv').config();
 const request = require('../request');
+const connect = require('../../lib/utils/connect');
+const mongoose = require('mongoose');
 
 describe('test character routes', () => {
+  beforeAll(() => {
+    connect();
+  });
+
+  beforeEach(() => {
+    return mongoose.connection.dropDatabase();
+  });
+
+  afterAll(() => {
+    return mongoose.connection.close();
+  });
+
   it('should post a character', () => {
     const data = {
       name: 'Adora',
@@ -25,10 +40,11 @@ describe('test character routes', () => {
     };
 
     return request
-      .get('/api/characters')
+      .post('/api/characters')
+      .send(data)
       .expect(200)
-      .then(res => {
-        expect(res.name).toBe('Adora');
+      .then(({ body }) => {
+        expect(body.name).toBe('Adora');
       });
   });
 });

@@ -60,7 +60,7 @@ describe('test character routes', () => {
     return postCharacter(adora)
       .then(() => {
         return request
-          .get('/characters')
+          .get('/api/characters')
           .expect(200);
       });
     

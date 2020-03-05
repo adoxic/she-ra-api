@@ -38,8 +38,15 @@ describe('test character routes', () => {
     Status: 'Alive'
   };
 
-  it('should post a character', () => {
+  const postCharacter = (data) => {
+    return request 
+      .post('/api/characters')
+      .send(data)
+      .expect(200)
+      .then(({ body }) => body);
+  };
 
+  it('should post a character', () => {
     return request
       .post('/api/characters')
       .send(adora)
@@ -50,11 +57,11 @@ describe('test character routes', () => {
   });
 
   it('should get a character', () => {
-    return request
-      .post('/api/characters')
-      .send(adora)
-      .then(({ body }) => {
-        expect(body.name).toBe('Adora');
+    return postCharacter(adora)
+      .then(() => {
+        return request
+          .get('/characters')
+          .expect(200);
       });
     
   });

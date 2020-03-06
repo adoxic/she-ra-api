@@ -38,6 +38,18 @@ describe('test character routes', () => {
     Status: 'Alive'
   };
 
+  const simple = [
+    { name: 'Scully' },
+    { name: 'Mulder' },
+    { name: 'Skinner' },
+    { name: 'Cigarette Man' },
+    { name: 'Mr. X' },
+    { name: 'Samantha' },
+    { name: 'The Lope Gunman' },
+    { name: 'The FBI' },
+    { name: 'Quequeck' }
+  ];
+
   const postCharacter = (data) => {
     return request 
       .post('/api/characters')
@@ -56,13 +68,42 @@ describe('test character routes', () => {
       });
   });
 
-  it('should get a character', () => {
+  it('should get all characters', () => {
     return postCharacter(adora)
       .then(() => {
         return request
           .get('/api/characters')
           .expect(200);
       });
-    
   });
+  
+  it('should get characters by page', () => {
+    return Promise.all([
+      simple.forEach(name => {
+        postCharacter(name);
+      })
+    ])
+      .then(() => {
+        return request
+          .get('/api/characters/page/1')
+          .expect(200)
+          .then(({ body }) => {
+            expect(body[0].name).toBe('Scully');
+            expect(body.length).toBe(5);
+          });
+      
+      })
+      .then(() => {
+        return request
+          .get('/api/characters/page/2')
+          .expect(200)
+          .then(({ body }) => {
+            expect(body[0].name).toBe('Samantha');
+            expect(body.length).toBe(4);
+          });
+      });
+      
+
+  });
+
 });

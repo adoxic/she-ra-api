@@ -85,7 +85,7 @@ describe('test character routes', () => {
     ])
       .then(() => {
         return request
-          .get('/api/characters/page/1')
+          .get('/api/characters/perPage/5/page/1')
           .expect(200)
           .then(({ body }) => {
             expect(body[0].name).toBe('Scully');
@@ -95,7 +95,7 @@ describe('test character routes', () => {
       })
       .then(() => {
         return request
-          .get('/api/characters/page/2')
+          .get('/api/characters/perPage/5/page/2')
           .expect(200)
           .then(({ body }) => {
             expect(body[0].name).toBe('Samantha');

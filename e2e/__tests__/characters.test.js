@@ -106,4 +106,16 @@ describe('test character routes', () => {
 
   });
 
+  it('should edit a character', () => {
+    return postCharacter({ name: 'Scully', Color: 'Blue' })
+      .then(body => {
+        return request
+          .put(`/api/characters/${body._id}`)
+          .send({ Color: 'Green' })
+          .expect(200)
+          .then(({ body }) => {
+            expect(body.Color).toBe('Green');
+          });
+      });
+  });
 });

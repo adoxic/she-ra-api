@@ -45,7 +45,7 @@ describe('test character routes', () => {
 
   const simpleArr = {
     name: 'thing',
-    Allies: ['Mulder']
+    Allies: ['different thing', 'Mulder']
   };
 
   const simple = [

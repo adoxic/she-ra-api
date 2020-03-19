@@ -38,6 +38,16 @@ describe('test character routes', () => {
     Status: 'Alive'
   };
 
+  const simpleOne = {
+    name: 'thing',
+    Allies: 'Mulder'
+  };
+
+  const simpleArr = {
+    name: 'thing',
+    Allies: ['different thing', 'Mulder']
+  };
+
   const simple = [
     { name: 'Scully' },
     { name: 'Mulder' },
@@ -107,7 +117,7 @@ describe('test character routes', () => {
   });
 
   it('should edit a character', () => {
-    return postCharacter({ name: 'Scully', Color: 'Blue' })
+    return postCharacter(simpleOne)
       .then(body => {
         return request
           .put(`/api/characters/${body._id}`)
@@ -115,6 +125,30 @@ describe('test character routes', () => {
           .expect(200)
           .then(({ body }) => {
             expect(body.Color).toBe('Green');
+          });
+      });
+  });
+
+  it('should get a category without an array', () => {
+    return postCharacter(simpleOne)
+      .then(() => {
+        return request
+          .get(`/api/characters/Allies/Mulder`)
+          .expect(200)
+          .then(({ body }) => {
+            console.log(body);
+          });
+      });
+  });
+
+  it('should get a category within an array', () => {
+    return postCharacter(simpleArr)
+      .then(() => {
+        return request
+          .get(`/api/characters/Allies/Mulder`)
+          .expect(200)
+          .then(({ body }) => {
+            console.log(body);
           });
       });
   });

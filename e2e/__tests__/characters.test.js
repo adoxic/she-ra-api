@@ -133,10 +133,10 @@ describe('test character routes', () => {
     return postCharacter(simpleOne)
       .then(() => {
         return request
-          .get(`/api/characters/Allies/Mulder`)
+          .get('/api/characters/Allies/Mulder')
           .expect(200)
           .then(({ body }) => {
-            console.log(body);
+            expect(body[0].name).toBe('thing');
           });
       });
   });
@@ -145,10 +145,10 @@ describe('test character routes', () => {
     return postCharacter(simpleArr)
       .then(() => {
         return request
-          .get(`/api/characters/Allies/Mulder`)
+          .get('/api/characters/Allies/Mulder')
           .expect(200)
           .then(({ body }) => {
-            console.log(body);
+            expect(body[0].name).toBe('thing');
           });
       });
   });

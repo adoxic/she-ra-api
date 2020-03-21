@@ -152,4 +152,16 @@ describe('test character routes', () => {
           });
       });
   });
+
+  it('should find a character bu name', () => {
+    return postCharacter(adora)
+      .then(() => {
+        return request
+          .get('/api/characters/Adora')
+          .expect(200)
+          .then(({ body }) => {
+            expect(body[0].name).toBe('Adora');
+          });
+      });
+  });
 });

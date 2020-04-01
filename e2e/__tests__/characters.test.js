@@ -153,11 +153,23 @@ describe('test character routes', () => {
       });
   });
 
-  it('should find a character bu name', () => {
+  it('should find a character by name', () => {
     return postCharacter(adora)
       .then(() => {
         return request
           .get('/api/characters/Adora')
+          .expect(200)
+          .then(({ body }) => {
+            expect(body[0].name).toBe('Adora');
+          });
+      });
+  });
+
+  it('capitalize first letter in character search', () => {
+    return postCharacter(adora)
+      .then(() => {
+        return request
+          .get('/api/characters/adora')
           .expect(200)
           .then(({ body }) => {
             expect(body[0].name).toBe('Adora');
